@@ -31,7 +31,6 @@ for i:=0;i<len(arr); {
        i++
     }
 }
-
 ```
 
 3. Binary Search / Insert
@@ -52,7 +51,6 @@ for i:=0;i<len(arr); {
        return l
     }
     return l+1
-}
 ```
 
 4. Find the Duplicate Number (all but one number is repeated)
@@ -64,7 +62,6 @@ for i:=0;i<len(arr); {
  * once slow & fast meet, to find the start of the loop - move slow to start of the loop
  * and move one at a time until slow & fast meet again (which is at the start of the loop)
  */
-func findDuplicate(nums []int) int {
     s,f := 0,0
     for {
         s, f = nums[s], nums[nums[f]]
