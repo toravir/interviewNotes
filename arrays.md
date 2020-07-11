@@ -78,5 +78,18 @@ for i:=0;i<len(arr); {
     }
 ```
 
+5. Prison Cell - each iteration - each cell's value is 1 if left cell == right cell (both occupied or vacant)
+Width is 8 cells - leftmost and rightmost become zero after the first iteration and stay that way.
+```
+/*
+ * Key is the pattern repeats - for 8 cells, it repeats after 14 (15th is same as 1st)
+ * use Algebra to find when it repeats
+ * Iteration #n:  |  c1  |   c2  |   c3  |   c4  |   c5  |   c6  |   c7  | c8  |
+ * Iteration #n+1:|   0  |1^c1^c3|1^c2^c4|1^c3^c5|1^c4^c6|1^c5^c7|1^c8^c8|  0  |
+ *           ...
+ *           ...
+ *                |  c1  |   c2  |   c3  |   c4  |   c5  |   c6  |   c7  | c8  |
+ */
+```
 
 
