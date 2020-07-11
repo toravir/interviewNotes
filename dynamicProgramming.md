@@ -63,4 +63,27 @@ Equal numbers to each city.
     return dpf(0,0)
 ```
 
+3. Perfect Squares - given a number n, find the least number of squares add up to n
+```
+/*
+ * for each number i,
+ *     iterate j: 1... Sqrt(i)
+ *        set dp[i] to the lowest dp[i-(j*j)]+1
+ */
+    dp := make([]int, n+1)
+    for i:=0;i<=n;i++ {
+        dp[i] = math.MaxInt32
+    }
+    dp[0], dp[1]=0, 1
+    for i:=2;i<=n;i++ {
+        for j:=1; j*j <= i; j++ {
+            if dp[i] > (dp[i-(j*j)]+1) {
+                dp[i] = dp[i-(j*j)]+1
+            }
+        }
+    }
+    return dp[n]
+```
+
+
 
