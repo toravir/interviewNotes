@@ -55,5 +55,31 @@ for i:=0;i<len(arr); {
 }
 ```
 
-4. 
+4. Find the Duplicate Number (all but one number is repeated)
+
+```
+/*
+ * Slow/Fast pointer - use the index as next pointer
+ *
+ * once slow & fast meet, to find the start of the loop - move slow to start of the loop
+ * and move one at a time until slow & fast meet again (which is at the start of the loop)
+ */
+func findDuplicate(nums []int) int {
+    s,f := 0,0
+    for {
+        s, f = nums[s], nums[nums[f]]
+        if (s == f) {
+            break
+        }
+    }
+    s = 0  // slow goes back to start of the list
+    for {
+        s,f = nums[s], nums[f]
+        if (s == f) {
+            return s
+        }
+    }
+```
+
+
 
