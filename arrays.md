@@ -92,4 +92,48 @@ Width is 8 cells - leftmost and rightmost become zero after the first iteration 
  */
 ```
 
+6. 3 Sum - given an array of numbers and target num find all combinations of 3 numbers that add upto target num
+```
+/*
+ * Sort the input array
+ * for i = 0 ... arr[n-3] {
+ *    // check and ignore dup values
+ *    set left is i+1, right as n-1
+ *    while l < r {
+ *        if num[i]+num[l]+num[r] == target // found a solution
+ *            > target // move right pointer
+ *            < target // move left pointer
+ *    }
+ * }
+ */
+    ret := make([][]int, 0)
+    sort.Ints(nums)
+    for i:=0;i<len(nums)-2;i++ {
+        if i > 0 && nums[i] == nums[i-1] {
+            continue
+        }
+        l, r :=i+1, len(nums)-1
+        for l<r {
+            sum := nums[i]+nums[l]+nums[r]
+            if sum == 0 {
+                ret = append(ret, []int{nums[i],nums[l],nums[r]})
+                for l<r && nums[l] == nums[l+1] { // to avoid dups
+                    l++
+                }
+                for l<r && nums[r] == nums[r-1] { // to avoid dups
+                    r--
+                }
+                l++
+                r--
+            }
+            if sum > 0 {
+                r--
+            } else if sum < 0 {
+                l++
+            }
+        }
+    }
+    return ret 
+```
+
 
