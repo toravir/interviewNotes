@@ -85,5 +85,45 @@ Equal numbers to each city.
     return dp[n]
 ```
 
-
+4. Longest Increasing Subsequence (or Largest Divisible subset)
+```
+/*
+ * 1. Sort optional
+ * 2. DP array to keep the largest divisible subset size so far (initial value of 1)
+ * 3. for x = 1..i-1 { if arr[i]%arr[x] == 0 then dp[i] = max(dp[i], dp[x]+1) }
+ * 4. //We know the largest set size in DP
+ * 5. Walk back dp array and see when size bumped up and record those numbers
+ * 6. additional check for divisibility (coz if there are more than one same size set - need to pick the right seq)
+ */
+ func largestDivisibleSubset(nums []int) []int {
+    sort.Ints(nums)
+    dp := make([]int, len(nums))
+    for i:=0;i<len(dp);i++ {
+        dp[i]=1
+    }
+    max := 1
+    for i:=0;i<len(nums);i++ {
+        for j:=0;j<i;j++ {
+            if nums[i]%nums[j] == 0 {
+                if dp[i] < dp[j]+1 {
+                    dp[i] = dp[j]+1
+                }
+            }
+        }
+        if max < dp[i] {
+            max = dp[i]
+        }
+    }
+    prev := 0
+    result := []int{}
+    for i:=len(dp)-1; i >= 0; i-- {
+        if dp[i]==max && (len(result) == 0 || nums[prev]%nums[i] == 0) {
+            prev = i
+            max--
+            result = append(result, nums[i])
+        }
+    }
+    return result
+} 
+```
 
