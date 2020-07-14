@@ -127,3 +127,36 @@ Equal numbers to each city.
 } 
 ```
 
+5. Cheapest Flight with K stops
+```
+/*
+ * dp array of hops vs dst
+ *
+ * dp[hop][dst] = min (dp[hop][dst], dp[hop-1][src]+flight_cost_from_src_to_dst)
+ *
+ */
+func findCheapestPrice(n int, flights [][]int, src int, dst int, K int) int {
+    max := 9999999999
+    dp := make([][]int, K+2)
+    for i:=0; i< len(dp); i++ {
+        dp[i] = make([]int, n)
+        for j:=0;j<n;j++ {
+            dp[i][j] = max
+        }
+    }
+    dp[0][src] = 0
+    for i:=1;i<len(dp);i++ {
+        dp[i][src] = 0  // cost is zero for any hops from src to src
+        for _, flt := range flights {
+            s,d,c := flt[0], flt[1], flt[2]
+            dp[i][d] = min(dp[i][d], dp[i-1][s]+c)
+        }
+    }
+    if dp[K+1][dst] == max {
+        return -1
+    }
+    return dp[K+1][dst]
+}
+```
+
+
