@@ -52,3 +52,9 @@ return ones
 
 ```
 
+Permutations and Combinations
+```
+nPr = (n!)/(n-r)!
+nCr = (n!)/((n-r)!r!)
+```
+
