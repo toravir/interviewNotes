@@ -1,10 +1,15 @@
 
-1. Clear the rightmost (set) bit - can be used to see if a number is power of 2
+Clear the rightmost (set) bit - can be used to see if a number is power of 2
 ```
 x = x & (x-1)
 ```
 
-2. counting bigs in parallel
+Isolate the right most bit
+```
+rmb = x & (-x)
+```
+
+counting bigs in parallel
 
 ```
 unsigned int v; // count bits set in this (32-bit value)
@@ -18,7 +23,7 @@ c = ((c >> 8) + c) & B[3]; // count 8 bits
 c = ((c >> 16) + c) & B[4]; // count 16 bits
 ```
 
-3. Swapping values with ```+ and - or ^```
+Swapping values with ```+ and - or ^```
 ```
 #define SWAP(a,b) ( \
                     ((&a) == (&b)) || \
@@ -28,7 +33,7 @@ c = ((c >> 16) + c) & B[4]; // count 16 bits
 
 ```
 
-4. Reverse N-bits
+Reverse N-bits
 ```
 unsigned int v; // 32-bit word to reverse bit order
 
@@ -44,7 +49,7 @@ v = ((v >> 8) & 0x00FF00FF) | ((v & 0x00FF00FF) << 8);
 v = ( v >> 16             ) | ( v               << 16);
 ```
 
-5. Count the consecutive zero bits (trailer)
+Count the consecutive zero bits (trailer)
 ```
 unsigned int v;      // 32-bit word input to count zero bits on right
 unsigned int c = 32; // c will be the number of zero bits on the right
