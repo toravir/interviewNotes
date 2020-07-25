@@ -48,4 +48,25 @@
     return res
 ```
 
+Number of Nodes in a Complete Binary Tree (not Perfect Binary Tree - 2^n -1)
+
+```
+/*
+ * check the left height (left->left->left...) and right height (right->right->right...)
+ * if equal - we have a perfect binary tree - if not - check children - re-use lh and rh
+ */
+func helper (root *TreeNode, lh int, rh int) int {
+	if root == nil { return 0 }
+	if lh == -1 {
+		lh = leftHt(root)  // this walks all Left till nil
+	}
+	if rh == -1 {
+		rh = rightHt(root)  // this walks all Right till nil
+	}
+	if (lh == rh) {
+		return (1 << lh)-1
+	}
+	return helper(root.Left, lh-1, -1) + countNodes(root.Right, -1, rh-1) + 1
+}
+```
 
