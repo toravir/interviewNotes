@@ -136,4 +136,23 @@ Width is 8 cells - leftmost and rightmost become zero after the first iteration 
     return ret 
 ```
 
+7. Finding minimum in a rotated sorted array (with dup)
+```
+/*
+ * mid may be equal to right - in that case do (right--)
+ */
+ l, r := 0, len(nums)-1
+ for l < r {
+   m := l + (r-l)/2
+   if nums[m] == nums[r] {
+      r--
+   } else if nums[m] > nums[r] {
+      l=m+1
+   } else {
+      r=m     // NOT m-1
+   }
+} 
+```
+
+
 
