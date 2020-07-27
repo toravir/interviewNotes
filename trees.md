@@ -70,3 +70,34 @@ func helper (root *TreeNode, lh int, rh int) int {
 }
 ```
 
+Construct Tree from Pre and Post Order (is NOT always unique tree)
+```
+
+func constructFromPrePost(pre []int, post []int) *TreeNode {
+    if len(pre) == 0 { return nil }
+    if len(pre) == 1 { return &TreeNode{Val: pre[0]}}
+    this := &TreeNode{Val:pre[0]}
+    lpre, rpre := []int {}, []int {}
+    lpos, rpos := []int {}, []int {}
+    isleft := true
+    for i:=1;i<len(pre);i++ {
+        r, o := pre[i], post[i-1]
+        if isleft {
+            lpre = append(lpre, r)
+            lpos = append(lpos, o)
+        } else {
+            rpre = append(rpre, r)
+            rpos = append(rpos, o)
+        }
+        if o == pre[1] {
+            isleft = false
+        }
+    }
+    this.Left  = constructFromPrePost(lpre, lpos)
+    this.Right = constructFromPrePost(rpre, rpos)
+    return this
+}
+```
+
+
+
