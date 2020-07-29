@@ -164,17 +164,20 @@ Stock Buy/Hold/Sell/Cooldown:
 /*
  * you can buy or sell or hold stock. when you sell - u have to wait a day before buying again
  * 
- *
+ * Logic:
+   bought = MAX (hold already bought, new buy)
+   sold   = MAX (sold, wait)
+   wait   = selling what was bought (in prev iteration)
+ return MAX (sold, wait)
  */
-   buy, sell, wait := 0, -prices[0], -999999
+   sold, bought, wait := 0, -prices[0], -9999999
    for i:=1;i<len(prices);i++ {
-     prevbuy, prevsell := buy, sell
-     buy = MAX(wait, buy)
-     sell = MAX(sell, prevbuy - prices[i])
-     wait = prevsell+prices[i]
-     fmt.Println(i, buy, sell, wait)
+     pbought := bought
+     bought = MAX(bought, sold - prices[i])
+     sold = MAX(sold, wait)
+     wait = pbought+prices[i]
    }
-   return MAX(wait, buy)
+   return MAX(sold, wait)
 ```
 
 
