@@ -159,4 +159,22 @@ func findCheapestPrice(n int, flights [][]int, src int, dst int, K int) int {
 }
 ```
 
+Stock Buy/Hold/Sell/Cooldown:
+```
+/*
+ * you can buy or sell or hold stock. when you sell - u have to wait a day before buying again
+ * 
+ *
+ */
+   buy, sell, wait := 0, -prices[0], -999999
+   for i:=1;i<len(prices);i++ {
+     prevbuy, prevsell := buy, sell
+     buy = MAX(wait, buy)
+     sell = MAX(sell, prevbuy - prices[i])
+     wait = prevsell+prices[i]
+     fmt.Println(i, buy, sell, wait)
+   }
+   return MAX(wait, buy)
+```
+
 
