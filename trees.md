@@ -99,5 +99,19 @@ func constructFromPrePost(pre []int, post []int) *TreeNode {
 }
 ```
 
-
+Least Common Ancestor of two nodes (used to find distance between two nodes)
+```
+func LCA (root, n1, n2):
+  if root == nil {return nil}
+  if root.val == n1 || root.val == n2 {
+     return root
+  }
+  l := LCA(root.Left, n1, n2)
+  r := LCA(root.Right, n1, n2)
+  if l != nil && r != nil {
+     return root // this node is the LCA
+  }
+  if l != nil { return l }
+  return r
+```
 
