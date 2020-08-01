@@ -154,5 +154,47 @@ Width is 8 cells - leftmost and rightmost become zero after the first iteration 
 } 
 ```
 
+Largest rectangle in a histogram
+```
+/*
+ * append a zero beginning and end of the arry
+ * push first elem's index (0) into the stack
+ * maxArea = 0
+ *
+ * while elements in heights:
+ *    if element > topOfStack {
+ *       push(element); go to next element
+ *    } else {
+ *       p = pop()
+ *       while p != peek() { pop() }  // to handle multiple same height buildings
+ *       thisArea = p * (current index - peek() -1)
+ *       maxArea = MAX(thisArea, maxArea)
+ *    }
+ *    return maxArea
+ */
+     heights = append([]int{0}, heights...)
+     heights = append(heights, 0)
+     maxarea, i := 0, 1
+     st.push(0)   // Store indices into the stack
+     for i<len(heights) {
+        tos := st.peek()
+        if st.isEmpty() || heights[i] >= heights[tos] {
+           st.push(i)
+           i++
+           continue
+        }
+        ev:=st.pop()
+        for ev == st.peek() && !st.isEmpty() {
+            st.pop()
+        }
+        thisarea := heights[ev]*(i - st.peek()-1)
+        if thisarea > maxarea {
+           maxarea = thisarea
+        }
+     }
+     return maxarea
+```
+
+
 
 
