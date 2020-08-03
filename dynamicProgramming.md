@@ -179,5 +179,33 @@ Stock Buy/Hold/Sell/Cooldown:
    }
    return MAX(sold, wait)
 ```
+Longest Common Subsequence
+```
+/*
+ * dp - 2d array of size m+1 x n+1 (first row and first col is all zeros)
+ *
+ * if (s1[i] == s2[j])
+ *     dp[i][j] = dp[i-1][j-1]+1 
+ * else
+ *     dp[i][j] = MAX(dp[i-1][j], dp[i][j-1])
+ */
 
+    m:=len(text1)
+    n:=len(text2)
+    dp:=make([][]int, n+1)
+    for i:=0;i<len(dp);i++ {
+       dp[i]=make([]int, m+1)
+    }
+    for i:=0;i<n;i++ {
+       for j:=0; j<m;j++ {
+           if text2[i] == text1[j] {
+              dp[i+1][j+1] = dp[i][j]+1
+           } else {
+              dp[i+1][j+1] = MAX(dp[i][j+1], dp[i+1][j])
+           }
+       }
+    }
+    //fmt.Println(dp)
+    return dp[n][m]
+```
 
