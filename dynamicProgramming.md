@@ -1,4 +1,4 @@
-
+  
 1. All possible combinations of coins to a target value
 ```
 /*
@@ -211,4 +211,42 @@ Longest Common Subsequence (also for longest palindrome subseqence)
     //fmt.Println(dp)
     return dp[n][m]
 ```
+
+Longest Palindrome SUBSTRING
+
+```
+/* Explore substrings of len 1..n
+ *  For each length check various starting points 0...n
+ *   given start and end indices - 
+ *      if s[start] == s[end] && s[start+1:end-] is a palindrome
+ *          expand
+ *      else
+ *          mark it as non-palindrome
+ * remember the largest palindrome and start and end indices
+ */
+    maxl := 0
+    maxst, maxen := 0, 0
+    for ln:=1; ln<=n; ln++ {
+      for st:=0; st < n; st++ {
+         en:=st+ln-1
+         if en > n-1 {
+            break
+         }
+         if en == st {
+            dp[st][en] = 1
+         } else {
+            // If st & end match and pre. substring is also palindrome - expand...
+            if s[st] == s[en] && dp[st+1][en-1] >= 0 {
+               dp[st][en] = dp[st+1][en-1]+2
+               if maxl < dp[st][en] {
+                  maxl, maxst, maxen = dp[st][en], st, en
+               }
+	        } else {
+	          dp[st][en] = -1
+	        }
+         }
+      }
+    }
+```
+
 
