@@ -195,6 +195,12 @@ Largest rectangle in a histogram
      return maxarea
 ```
 
+Manacher Algorithm (Longest Palindrome Substring)
+
+```
+
+```
+
 
 
 
