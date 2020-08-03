@@ -179,7 +179,8 @@ Stock Buy/Hold/Sell/Cooldown:
    }
    return MAX(sold, wait)
 ```
-Longest Common Subsequence
+Longest Common Subsequence (also for longest palindrome subseqence)
+
 ```
 /*
  * dp - 2d array of size m+1 x n+1 (first row and first col is all zeros)
@@ -188,6 +189,8 @@ Longest Common Subsequence
  *     dp[i][j] = dp[i-1][j-1]+1 
  * else
  *     dp[i][j] = MAX(dp[i-1][j], dp[i][j-1])
+ *
+ * LCS of string and reverse of string is the longest palindrome subsequence
  */
 
     m:=len(text1)
