@@ -241,9 +241,9 @@ Longest Palindrome SUBSTRING
                if maxl < dp[st][en] {
                   maxl, maxst, maxen = dp[st][en], st, en
                }
-	        } else {
-	          dp[st][en] = -1
-	        }
+            } else {
+              dp[st][en] = -1
+            }
          }
       }
     }
