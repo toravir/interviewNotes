@@ -201,6 +201,44 @@ Manacher Algorithm (Longest Palindrome Substring)
 
 ```
 
+K Nearest Elements from a sorted array
+
+```
+/*
+ * do binary search - keep track of delta with middle - remember the smallest delta & index
+ * move left and right to pickup k elements
+ */
+    l, r :=0, len(arr)-1
+    closest, val := INF, -1 
+    for l<=r {
+       m:=l+(r-l)/2
+       if abs(arr[m]-x) < closest {
+          closest, val = abs(arr[m]-x), m
+       }
+       if arr[m] > x {
+          r = m-1
+       } else {
+          l = m+1
+       }
+    }
+    l, r = val, val+1
+    for i:=0;i<k;i++ {
+       ld, rd := INF, INF
+       if l >= 0 {
+          ld = abs(arr[l]-x)
+       }
+       if r <= len(arr)-1 {
+          rd = abs(arr[r]-x)
+       }
+       if ld <= rd {
+          l--
+       } else {
+          r++
+       }
+    }
+    l++
+    return arr[l:r]
+```
 
 
 
