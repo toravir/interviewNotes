@@ -56,5 +56,9 @@ Permutations and Combinations
 ```
 nPr = (n!)/(n-r)!
 nCr = (n!)/((n-r)!r!)
+
+Pascal's Triangle - each row k is:
+kC0, kC1, kC2, ... kCk
+
 ```
 
