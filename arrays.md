@@ -240,5 +240,27 @@ K Nearest Elements from a sorted array
     return arr[l:r]
 ```
 
+H-Index
+```
+/*
+ 1. Find freq of papers with 0..n (citations greater than n is accounted under n)
+ 2. Walk from the back - summing papers & reducing i - the moment sum is greater than i, return i
+ */
 
+func hIndex(a []int) int {
+    n:=len(a)
+    freq := make([]int, n+1)
+    for i:=0;i<n;i++ {
+       freq[min(a[i], n)] += 1
+    }
+    tot:=0
+    for i:=n;i>=0;i-- {
+       tot += freq[i]
+       if tot >= i {
+	  return i
+       }
+    }
+    return 0
+}
+```
 
