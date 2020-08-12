@@ -53,7 +53,7 @@ for i:=0;i<len(arr); {
     return l+1
 ```
 
-4. Find the Duplicate Number (all but one number is repeated)
+4. Find the Duplicate Number (array of n+1 elements - each value 1..n - only number is repeated)
 
 ```
 /*
