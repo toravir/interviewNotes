@@ -263,4 +263,30 @@ func hIndex(a []int) int {
     return 0
 }
 ```
+Rotate array Inplace
+```
+array of len (n)
+num of rotations (r)
+r = r % n   // since after n rotations array is restored
 
+Brute force: move one elem at a time O(n*r)
+Efficient: O(n) - find GCD(n, r)
+for i:=0;i<gcd(n,r);i++
+   save and a[i], 
+       a[i] = a[(i+r)%n] .... until loop is complete then next i...
+
+   n := int32(len(a))
+   r = r % n
+   iti := GCD(n, r)
+   for i:=int32(0); i<iti; i++ {
+       t, dst:=a[i], i
+       for {
+           a[dst] = a[(dst+d)%n]
+           dst = (dst+d)%n
+           if (dst+d)%n == i { // end of loop
+               a[dst]=t
+               break
+           }}}
+   return a
+
+```
