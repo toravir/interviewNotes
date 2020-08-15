@@ -3,7 +3,7 @@
   - [ ]  896. Monotonic Array (Easy)
   - [x]  238. Product of Array Except Self (Medium)
   - [ ]  48. Rotate Image (Medium)
-  - [ ]  33. Search in Rotated Sorted Array (Medium)
+  - [x]  33. Search in Rotated Sorted Array (Medium)
   - [ ]  34. Find First and Last Position of Element in Sorted Array (Medium)
   - [ ]  189. Rotate Array (Easy)
   - [ ]  118. Pascal's Triangle (Easy)
