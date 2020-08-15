@@ -27,7 +27,7 @@ for i:=0;i<len(arr); {
        arr.swap(i, l)
        i++
        l++
-    } else {
+    } else { 
        i++
     }
 }
@@ -290,3 +290,35 @@ for i:=0;i<gcd(n,r);i++
    return a
 
 ```
+
+Search in a Rotated Array
+```
+/*
+1. do binary search
+2. if left half is sorted
+   and if target is in left - go left
+   else go right
+3. right must be sorted
+   if target is on the right, go right
+   else go left
+
+    for l<=r {
+        m:=l+(r-l)/2
+        if nums[m] == target { return m }
+        if nums[l] <= nums[m] {
+            if nums[l] <= target && target <= nums[m] {
+                r = m-1
+            } else {
+                l = m+1
+            }
+        } else {
+            if nums[m] <= target && target <= nums[r] {
+                l = m+1
+            } else {
+                r = m-1
+            }
+	}}
+*/
+```
+
+
