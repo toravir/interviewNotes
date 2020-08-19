@@ -249,4 +249,46 @@ Longest Palindrome SUBSTRING
     }
 ```
 
+Stock/Buy Sell - K transactions
+
+```
+/*
+1. if k > n/2 (we can buy and sell whenever) - so max prof is sum of all increase in prices
+2. Setup DP - two arrays : bought[] and sold[] of size k
+// For each price - price[i] go through the entire bought/sold arrays
+for each price[i]
+   bought[0] = max(bought[0], -price[i])  // day 0 we are down on money
+   sold[0] = max(sold[0], bought[0]+price[i])
+   for j=1..k
+     bought[j] = max(bought[j], sold[j-1]-price[i])
+     sold[j]   = max(sold[j], bought[j]+price[i])
+
+sold[k-1] will have the final answer
+*/
+    if k > len(prices)/2 {
+        prof:=0
+        for i:=0;i<len(prices)-1;i++ {
+            if prices[i]<prices[i+1] {
+                prof+=prices[i+1]-prices[i]
+            }
+        }
+        return prof
+    }
+  buy := make([]int, k)
+  sell := make([]int, k)    
+  for i,_ := range buy {
+       buy[i] = MIN_INTEGER
+  }
+  for i:=0;i<len(prices);i++ {
+    buy[0]  = maxOf(buy[0], -prices[i])
+    sell[0] = maxOf(sell[0], buy[0]+prices[i])
+    for j:=0; j < k; j++ {
+        buy[j]  = maxOf(buy[j], sell[j-1]-prices[i])
+        sell[j] = maxOf(sell[j], buy[j]+prices[i])
+      }
+  }
+  return sell[k-1]
+```
+
+
 
