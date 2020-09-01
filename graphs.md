@@ -8,7 +8,6 @@ Number of different spanning Trees = (eC(v-1) - Y) --->
      number of edges is e and you are choosing v-1 - #cycles has to be removed
     
 
-
 Minimum Spanning Tree
 ```
 Prims Algo:
@@ -25,6 +24,8 @@ Kruskals Algo:
 #Use MinHeap to reduce complexity to O(nloge)   
 ```
 
+Longest Path - multiply weights by -1 and find shortest path 
+               and restore the weights and result
 Shortest Path
 ```
 //One starting node, find shortest paths to all nodes (can stop in the middle)
