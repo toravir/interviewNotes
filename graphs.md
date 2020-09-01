@@ -58,7 +58,7 @@ O(n^3)
       dist[v] = infinity
       pred[v] = undefined
 2. for i := 1 ... len(vertices)-1:
-     for each edge(u,v):
+     for each edge(u,v):   // we run this loop V-1 times (V = num of Vertices)
         if dist[v] > dist[u]+weight(u,v):
            dist[v] = dist[u]+weight(u,v)
            pred[v] = u
