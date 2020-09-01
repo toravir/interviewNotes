@@ -45,10 +45,11 @@ Djikstra's Algo - CANNOT HANDLE -ve edges (unreliable) - Greedy approach
          if dist[v] > newd:
             dist[v] = newd
             pred[v] = u
-            Q.decrease_priority(v, newd)
+            Q.decrease_priority(v, newd) // See optimization in #6
             
 5. //Dist has distances and //pred can be used to walk back
-
+6. optimization - add a dupl entry with v and newd into PQ since
+   - decrease priority is not easy - sometimes O(N) vs O(lg N) for insert
 
 Bellman Ford - handles -ve edges - used dynamic Programming approach
 O(n^3)
