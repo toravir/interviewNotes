@@ -62,3 +62,19 @@ kC0, kC1, kC2, ... kCk
 
 ```
 
+Calculate nCr for Large Values
+```
+func nCr (n, r int) int {
+    num, den := 1, 1
+    if n - r < r { r = n - r }
+    if r == 0 { return 1 }
+    for r > 0 {
+        num, den = num*n, den*r
+        g := gcd(num, den)
+        num, den = num/g, den/g
+        n, r = n-1, r-1
+    }
+    return num/den
+}
+```
+
