@@ -391,4 +391,40 @@ if cmin-(i-imin) > A[i] { cmin, imin = A[i], i }
 return fv
 ```
 
+Maximum Distance
+Max value of j-i, A[i] <= A[j]
+```
+/*
+build lMin and rMax Arrays
+lMin[i] - has value that is lowest to the left of i (incl.)
+rMax[i] - has value that is highest to the right of i (incl.)
+
+i, j = 0, 0
+Walk lMin and rMax (0..n):
+  if lMin[i] <= rMax[j]:
+     curMax = max(curMax, j-i)
+     j++
+  else:
+     i++
+return curMax
+*/
+
+    lMin := make([]int, n)
+    rMax := make([]int, n)
+    lMin[0], rMax[n-1] = A[0], A[n-1]
+    for i:=1;i<n;i++ {
+        lMin[i]     = min(lMin[i-1], A[i])
+        rMax[n-i-1] = max(rMax[n-i], A[n-i-1])
+    }
+    i, j, ans := 0, 0, 0
+    for i < n && j < n {
+        if lMin[i] <= rMax[j] {
+            ans = max(ans, j-i)
+            j++
+        } else {
+            i++
+        }
+    }
+    return ans
+```
 
