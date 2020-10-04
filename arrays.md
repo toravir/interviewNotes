@@ -321,4 +321,48 @@ Search in a Rotated Array
 */
 ```
 
+Find a number that appears more than n/3 times
 
+```
+/*
+Have two candidates - (val, count)
+
+foreach element:
+   if value matches a candidate - incr counter
+   else if count is zero pickup value into the candidate
+   else decr count for both candidates
+
+We have two candidates that can exceed n/3
+
+Walk the list and find both candidate counts
+verify if the count is indeed > n/3.
+
+*/
+    c1, v1 := 0, 0
+    c2, v2 := 0, 0
+    for _, v := range nums {
+        if v == v1 {
+            c1++
+        } else if v == v2 {
+            c2++
+        } else if c1 == 0 {
+            v1, c1 = v, 1
+        } else if c2 == 0 {
+            v2, c2 = v, 1
+        } else {
+            c1, c2 = c1-1, c2-1
+        }
+    }
+    c1, c2 = 0, 0 
+    for _, v := range nums {
+        if v == v1 {
+            c1++
+        } else if v == v2 {
+            c2++
+        }
+    }
+    ans := []int{}
+    if c1 > len(nums)/3 { ans = append(ans, v1) }
+    if c2 > len(nums)/3 { ans = append(ans, v2) }
+    return ans
+```
