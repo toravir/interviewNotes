@@ -366,3 +366,29 @@ verify if the count is indeed > n/3.
     if c2 > len(nums)/3 { ans = append(ans, v2) }
     return ans
 ```
+
+MAX Abs Difference
+
+```
+/*
+Given an Array find max value of f(i,j) = |A[i]-A[j]| + |i-j|
+
+keep track of min and max as you go - adjust for diff in indices
+if cmax+(i-imax) < A[i] { cmax, imax = A[i], i }
+if cmin-(i-imin) > A[i] { cmin, imin = A[i], i }
+*/
+    fn := func (i, j int) int { return abs(A[i]-A[j])+abs(i-j) }
+    for i:=1;i<len(A);i++ {
+        if cmin-(i-imin) > A[i] {
+            imin, cmin = i, A[i]
+        } else if cmax+(i-imax) < A[i] {
+            imax, cmax = i, A[i]
+        }
+        tv := max(fn(i, imin), fn(i, imax))
+        if fv < tv { fv = tv }
+    }
+
+return fv
+```
+
+
