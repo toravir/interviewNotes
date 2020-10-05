@@ -428,3 +428,32 @@ return curMax
     return ans
 ```
 
+Find first missing +ve Number
+```
+/*
+1. Move -ve numbers and 0 to the left and forget them
+2. walk all +ve (>0) numbers and if it falls within the array range
+   mark that index -ve (if not already -ve)
+3. Walk the +ve numbers - the index of the first +ve number is the missing value
+*/
+    j, n := 0, len(A)
+    for i:=0;i<len(A);i++ {
+        if A[i] <= 0 {
+            A[j], A[i] = A[i], A[j]
+            j++
+        }
+    }
+    if j == n { return 1 }
+    A = A[j:]  //Moved -ve numbers to left and removed them
+    n = len(A)
+    for i:=0;i<n;i++ {
+        if abs(A[i]-1) < n && A[abs(A[i])-1] > 0 {
+            A[abs(A[i])-1] = -A[abs(A[i])-1]
+        }
+    }
+    for i:=0;i<n;i++ {
+        if A[i] > 0 { return i+1 }
+    }
+    return n+1
+}
+```
