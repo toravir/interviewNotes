@@ -78,3 +78,34 @@ func nCr (n, r int) int {
 }
 ```
 
+Transform the array - so A[i] => A[A[i]], given 0 <= A[i] <= N-1
+
+```
+/*
+Store two numbers in one place a & b can be stored if
+a + b*n is stored. A[i]%n = a, A[i]/n = b, since 0 <= a,b <= N-1
+*/
+    int i = 0;
+    for (i=0; i<n1;i++) {
+        A[i] += (A[A[i]]%n1)*n1;  // need a %n1 - because A[A[i]] could already be encoded
+    }
+    for (i=0;i<n1;i++) {
+        A[i] = A[i]/n1;
+    }
+```
+
+Sieve of Prime Numbers (until N)
+```
+#1: Eratosthenes
+/*
+Start with an array A[0..N]- mark it all true
+for i=2 .. N:
+  if A[i] == True:
+     Add i to list of primes
+     mark all multiples of i starting from i*i till N as false
+*/
+
+
+```
+
+
