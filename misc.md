@@ -105,7 +105,33 @@ for i=2 .. N:
      mark all multiples of i starting from i*i till N as false
 */
 
-
+#2: Sieve of Sundaram
+/*
+Create an array of A[0..(n-1)/2+1] - fill it will true
+for i:=1;i<=(n-1)/2;i++ {
+   for j:=1 ; (i+j+2ij) < (n-1)/2 ; j++ {
+      A[i+j+2*i*j] = false
+   }
+}
+primesList = {2}
+for i:=1;i<=(n-1)/2;i++ {
+   if A[i] == true {
+      primesList += {2*i+1}
+   }
+}
+*/
+    t := (n-1)/2 + 1
+    cand := make([]bool, t)
+    for i:=0;i<t;i++ { cand[i] = true }
+    for i:=1;i<t;i++ {
+        for j:=i; (i+j+2*i*j) <t;j++ {
+            cand[i+j+2*i*j] = false
+        }
+    }
+    ans := []int{2}
+    for i:=1;i<t;i++ {
+        if cand[i] { ans = append(ans, 2*i + 1) }
+    }
 ```
 
 
