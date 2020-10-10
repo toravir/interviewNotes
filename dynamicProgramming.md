@@ -290,5 +290,38 @@ sold[k-1] will have the final answer
   return sell[k-1]
 ```
 
+Longest Palindromic Substring
+```
+/*
+Core: substring A[x...y] is palindrome if A[x]==A[y] and A[x+1...y-1] is a palindrome
+Base: dp[x][x] is true (palindrome)... + dp[x][x+1] is true if A[x]==A[x+1]
 
+1.fill the diagonal [i][i] and [i][i+1]
+2. for varying lengths ranging from 3..n (aka indices 2..n-1)
+     for each starting position 0..n-j
+        dp[i][i+j] = A[i]==A[i+j] && dp[i+1][i+j-1]
+*/
+     n, ba, dp := len(A), []byte(A), make([][]bool, n)
+     for i:=0;i<n;i++ {
+        dp[i]=make([]bool, n)
+     }
+     for i:=0;i<n;i++ {
+         dp[i][i]=true
+     }
+     ans:=string(A[0:1])
+     for i:=0;i<n-1;i++ {
+        if A[i]==A[i+1] {
+            dp[i][i+1]=true
+            ans=string(A[i:i+2])
+        }
+     }
+     for j:=2;j<n;j++ {
+        for i:=0;i<n-j;i++ {
+            dp[i][i+j] = dp[i+1][i+j-1] && A[i] == A[i+j]
+            if dp[i][i+j] && j > len(ans)-1 {
+               ans=string(ba[i:i+j+1])
+            }
+        }
+     }
+```
 
