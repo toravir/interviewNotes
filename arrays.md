@@ -457,3 +457,33 @@ Find first missing +ve Number
     return n+1
 }
 ```
+
+Given 3 Sorted Arrays, find 3 elements that are closest to each other - so that
+max(abs(A[i] - B[j]), abs(B[j] - C[k]), abs(C[k] - A[i])) is lowest.
+```
+/*
+ 1. start with pointers in each of the arrays
+ 2. compute lowest max(3 vals) - min(3 vals)
+ 3. next advance the min value array from #2
+*/
+    for i,j,k:=0,0,0 ; i<na && j<nb && k<nc; {
+        x,y,z:=A[i],B[j],C[k]
+        max,min := max3(x,y,z), min3(x,y,z) 
+        d := max - min
+        if d < diff {
+            diff = d
+            ans[0],ans[1],ans[2]=x,y,z
+            if d == 0 { break }
+        }
+        if x == min {
+           i++
+        } else if y == min {
+           j++
+        } else {
+           k++
+        }
+    }
+```
+
+
+
