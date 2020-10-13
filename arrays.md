@@ -184,10 +184,8 @@ Largest rectangle in a histogram
            continue
         }
         ev:=st.pop()
-        for ev == st.peek() && !st.isEmpty() {
-            st.pop()
-        }
-        thisarea := heights[ev]*(i - st.peek()-1)
+	left, right := st.peek()+1, i
+        thisarea := heights[ev]*(right - left)
         if thisarea > maxarea {
            maxarea = thisarea
         }
