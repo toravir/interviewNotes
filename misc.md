@@ -135,3 +135,48 @@ for i:=1;i<=(n-1)/2;i++ {
 ```
 
 
+To get fraction - A/B -
+```
+/*
+    1. whole number = A/B (integer division)
+    2. To get the fractional part - do this - start with
+       remainder = A % B
+       for remainder > 0 {
+           remainder *= 10
+           nxtdigit = remainder/B
+           remainder %= B
+       }
+    3. If the same remainder is seen - then the digits repeat - so keep a 
+       map of what remainder was at each position in the fractional part
+*/
+
+func fractionToDecimal(A int , B int )  (string) {
+     if A == 0 { return "0" }
+     ans:=""
+     if (A<0) != (B<0) {
+         ans+="-"
+     }
+     A, B = abs(A), abs(B)
+     div, rem :=A/B, A%B
+     ans+=strconv.Itoa(div)
+     dec, tbl, dotted := "", map[int]int{}, false
+     v, i := -1, 0
+     var ok bool
+     for rem > 0 {
+         if v, ok = tbl[rem]; ok { break }
+         tbl[rem]=i
+         rem *= 10
+         if !dotted { 
+             dec += "."
+             dotted = true
+         }
+         dec+=string([]byte{'0'+byte(rem/B)})
+         i++
+         rem %= B
+     }
+     if rem == 0 { return ans+dec }
+     return ans + dec[:v+1] + "(" + dec[v+1:] + ")"
+}
+
+```
+
