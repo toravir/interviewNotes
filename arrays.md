@@ -483,5 +483,27 @@ max(abs(A[i] - B[j]), abs(B[j] - C[k]), abs(C[k] - A[i])) is lowest.
     }
 ```
 
+Reorder persons according to the infront rank
+Order people with various heights based on # of ppl. taller in front
+```
+/*
+1. sort the heights+infront #
+2. start from smallest -
+   for each person - ensure there are enough empty spots infront
+*/
+     sort.Slice(allp, func (i, j int) bool { return allp[i].ht < allp[j].ht })
+     for i:=0;i<len(allp); i++ {
+         j, cnt := 0, allp[i].pos
+         for j=0;j<len(ans) && cnt > 0;j++ {
+            if ans[j] == 0 { cnt -- }
+         }
+         for ;j<len(ans);j++ {
+             if ans[j] == 0 { 
+                ans[j] = allp[i].ht
+                break
+             }
+         }
+     }
 
+```
 
