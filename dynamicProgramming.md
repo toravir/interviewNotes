@@ -325,3 +325,31 @@ Base: dp[x][x] is true (palindrome)... + dp[x][x+1] is true if A[x]==A[x+1]
      }
 ```
 
+Regular expression matching - '* - matches with any characters'
+```
+   i - index of str, j - index of pat
+   if str[i-1] == pat[j-1] || pat[j-1] == '?'
+       dp[i][j] = dp[i-1][j-1]
+   if pat[j-1] == '*'
+       dp[i][j] = dp[i-1][j] || dp[i][j-1]   // consume ith char or not
+```
+
+Minimum edit distance between two strings - opers:
+1. modify one char,
+2. add one char
+3. del one char
+
+```
+   for i:=0;i<len(A)+1;i++
+      for j:=0;j<len(B)+1;j++
+         if i == 0 || j == 0 { 
+            dp[i][j] = i + j
+            continue
+         }
+         if A[i-1] == B[j-1] { 
+            dp[i][j] = dp[i-1][j-1]
+         } else {
+            dp[i][j] = 1 + min (dp[i-1][j-1], dp[i-1][j], dp[i][j-1])
+         }
+```
+
