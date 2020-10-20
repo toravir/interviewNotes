@@ -34,9 +34,7 @@ Equal numbers to each city.
             return 9999999999
         }
         if i == len(costs) {
-            if counta == len(costs)/2 {
-                return 0
-            }
+            if counta == len(costs)/2 { return 0 }
             return 9999999999
         }
         a,b:=0,0
@@ -55,9 +53,7 @@ Equal numbers to each city.
             cache[(i+1)*1000+counta] = b
             b+=costs[i][1]
         }
-        if a < b {
-            return a
-        }
+        if a < b { return a }
         return b
     }
     return dpf(0,0)
@@ -105,14 +101,10 @@ Equal numbers to each city.
     for i:=0;i<len(nums);i++ {
         for j:=0;j<i;j++ {
             if nums[i]%nums[j] == 0 {
-                if dp[i] < dp[j]+1 {
-                    dp[i] = dp[j]+1
-                }
+                if dp[i] < dp[j]+1 { dp[i] = dp[j]+1 }
             }
         }
-        if max < dp[i] {
-            max = dp[i]
-        }
+        if max < dp[i] { max = dp[i] }
     }
     prev := 0
     result := []int{}
@@ -152,9 +144,7 @@ func findCheapestPrice(n int, flights [][]int, src int, dst int, K int) int {
             dp[i][d] = min(dp[i][d], dp[i-1][s]+c)
         }
     }
-    if dp[K+1][dst] == max {
-        return -1
-    }
+    if dp[K+1][dst] == max { return -1 }
     return dp[K+1][dst]
 }
 ```
@@ -229,9 +219,7 @@ Longest Palindrome SUBSTRING
     for ln:=1; ln<=n; ln++ {
       for st:=0; st < n; st++ {
          en:=st+ln-1
-         if en > n-1 {
-            break
-         }
+         if en > n-1 { break }
          if en == st {
             dp[st][en] = 1
          } else {
@@ -241,9 +229,7 @@ Longest Palindrome SUBSTRING
                if maxl < dp[st][en] {
                   maxl, maxst, maxen = dp[st][en], st, en
                }
-            } else {
-              dp[st][en] = -1
-            }
+            } else { dp[st][en] = -1 }
          }
       }
     }
@@ -352,4 +338,25 @@ Minimum edit distance between two strings - opers:
             dp[i][j] = 1 + min (dp[i-1][j-1], dp[i-1][j], dp[i][j-1])
          }
 ```
+
+Number of subarrays that sub to k
+items can be +ve or -ve
+```
+/*
+  init map[int]int
+  iterate the array from l to r
+     accumulate the sum in a var say csum
+     if csum == k { count ++ }
+     if map[k-csum] is found { count += value in map[k-csum] }
+     map[csum] += 1
+  return count
+*/
+    for i:=0;i<len(nums);i++ {
+        sum+=nums[i]
+        if sum == k { count ++ }
+        if v, ok := tbl[sum-k]; ok { count+=v }
+        if v, ok := tbl[sum]; ok { tbl[sum] = v+1 } else { tbl[sum]=1 }
+    }
+```
+
 
