@@ -359,4 +359,33 @@ items can be +ve or -ve
     }
 ```
 
+Number of Submatrices that add up to k
 
+```
+/* extension of the sub-array sum to k
+   precompute cumu - sum of all columns - ie  precomp[i][j] = SUM(A[0..i][j])
+   for each sr and end row - compute the values along the column - and see how many subarrays result in sum k   
+*/
+    csum := make([][]int, nr+1)
+    for i:=0;i<nr+1;i++ {
+       csum[i] = make([]int, nc)
+    }
+    for i:=1;i<nr+1;i++ {
+       for j:=0;j<nc;j++ {
+          csum[i][j] = A[i-1][j]+csum[i-1][j]
+       }
+    }
+    ans := 0
+    for sr:=1;sr<=nr;sr++ {
+       for er:=sr; er<nr+1; er++ {
+           tbl, cs :=map[int]int{}, 0
+           for j:=0;j<nc;j++ {
+               cs += csum[er][j]-csum[sr-1][j]
+               if cs == k { ans ++ }
+               if v, ok := tbl[cs-k]; ok { ans += v }
+               if v, ok := tbl[cs]; ok { tbl[cs]=v+1 } else {tbl[cs]=1}
+           }
+       }
+    }
+}
+```
