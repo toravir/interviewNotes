@@ -389,3 +389,15 @@ Number of Submatrices that add up to k
     }
 }
 ```
+
+Ways to decode a string - no wild cards
+```
+   /*
+      if A[0] == '0' { return 0 } // cannot start with '0'
+      dp[0], dp[1] = 1, 1
+      if A[i] > '0' { dp[i] += dp[i-1] }
+      if A[i-1]=='1' || (A[i-1]=='2' && A[i] <= '7') { dp[i] += dp[i-2] }
+   */
+   
+
+```
