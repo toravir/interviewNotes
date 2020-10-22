@@ -401,3 +401,26 @@ Ways to decode a string - no wild cards
    
 
 ```
+
+Min Jumps to reach end (from start)
+```
+/*
+   maxReach - keeps track of farthest one can go
+   step - keeps steps we can take - till we reach maxReach
+   jump - number of jumps to reach maxReach
+*/
+    if len(A) < 2 { return 0 }
+    if A[0] == 0 { return -1 }
+    mr, st, jc :=A[0], A[0], 1
+    for i:=1;i<len(A);i++ {
+        if i == len(A)-1 { return jc }
+        mr = max(mr, i+A[i])
+        st--
+        if st == 0 {
+           if i >= mr { return -1 }
+           jc, st = jc +1, mr-i
+        }
+    }
+    return -1
+```
+
