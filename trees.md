@@ -66,7 +66,7 @@ func helper (root *TreeNode, lh int, rh int) int {
 	if (lh == rh) {
 		return (1 << lh)-1
 	}
-	return helper(root.Left, lh-1, -1) + countNodes(root.Right, -1, rh-1) + 1
+	return helper(root.Left, lh-1, -1) + helper(root.Right, -1, rh-1) + 1
 }
 ```
 
