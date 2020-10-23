@@ -9,7 +9,7 @@ Isolate the right most bit
 rmb = x & (-x)
 ```
 
-counting bigs in parallel
+counting bits in parallel
 
 ```
 unsigned int v; // count bits set in this (32-bit value)
