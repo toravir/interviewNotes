@@ -424,3 +424,43 @@ Min Jumps to reach end (from start)
     return -1
 ```
 
+Minimum sign flips to make sum of array of +ve nums close to zero
+
+```
+/*
+dp - two rows - prior and current row
+colums - all possible sums (from -sum...sum) - sum - total of (2*sum+1)
+
+dp[0][0] = 0  // meaning with zero elements, getting to zero sum, 0 flips are needed
+dp[i][j] = min(dp[i][j-A[i-1]], dp[i][j+A[i-1]+1)   // no flip or flip A[i-1]
+
+j-A[i-1]  and j+A[i-1] - shd be within (-sum .. +sum) 
+also dp[i][j+A[i-1]] has to be valid (non MAX)
+
+*/
+    dp := [2][]int{make([]int, 2*sum+1), make([]int, 2*sum+1)}
+    for i:=-sum;i<=sum;i++ {
+        dp[0][sum+i] = MAX
+    }
+    cnt, dp[0][sum] = 1, 0
+    for i:=1;i<=len(A);i++ {
+       for j:=-sum;j<=sum; j++ {
+            dp[cnt%2][sum+j] = MAX
+            be, n2be :=j-A[i-1], j+A[i-1]
+            if -sum <= be && be <= sum {
+                dp[cnt%2][sum+j]=dp[(cnt+1)%2][sum+be]
+            }
+            if -sum <= n2be && n2be <= sum && dp[(cnt+1)%2][sum+n2be] != MAX {
+                dp[cnt%2][sum+j]=min(dp[cnt%2][j+sum], dp[(cnt+1)%2][sum+n2be]+1)
+            }
+       }
+       cnt++
+    }
+    for i:=0;i<=sum;i++ {
+        if dp[(cnt+1)%2][sum+i] != MAX { return dp[(cnt+1)%2][sum+i] }
+    }
+    return len(A)-1
+    
+```
+
+
