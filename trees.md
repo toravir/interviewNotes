@@ -115,3 +115,36 @@ func LCA (root, n1, n2):
   return r
 ```
 
+Binary Indexed Tree
+```
+type NumArray struct { tree []int }
+func Constructor(nums []int) NumArray {
+    t := NumArray{make([]int, len(nums)+1)}
+    t.tree[0] = 0
+    copy(t.tree[1:], nums)
+    for i:=1;i<len(t.tree);i++ {
+        p:=i+(i & -i )
+        if p < len(t.tree) { t.tree[p] += t.tree[i] }
+
+func (this *NumArray) prefixSum (i int) int {
+   ni, sum := i+1, 0
+   for ni > 0 {
+       sum += this.tree[ni]
+       ni -= (ni & -ni)
+   }
+   return sum
+
+func (this *NumArray) Update(i int, val int)  {
+    ov := this.prefixSum(i) - this.prefixSum(i-1)
+    ni, delta := i+1, val - ov
+    for ni < len(this.tree) {
+        this.tree[ni] += delta
+        ni += (ni & -ni)
+
+func (this *NumArray) SumRange(i int, j int) int {
+    return this.prefixSum(j) - this.prefixSum(i-1)
+}
+
+```
+
+
