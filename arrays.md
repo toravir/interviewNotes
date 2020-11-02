@@ -53,6 +53,39 @@ for i:=0;i<len(arr); {
     return l+1
 ```
 
+Binary Search for Strictly Higher Elem
+```
+    ans, l, r := 0, 0, len(arr)-1
+    for l <= r {
+        m:=l+(r-l)/2
+        if arr[m] <= key {
+           l = m+1
+        } else {
+           ans, r = m, m - 1
+        }
+    }
+    if arr[ans] < key { return -1 } 
+    return arr[ans]
+```
+
+Binary Search for Strictly Lower Elem
+```
+    ans, l, r := 0, 0, len(arr)-1
+    for l <= r {
+        m:=l+(r-l)/2
+        if arr[m] <= key {
+           ans, l = m, m+1
+        } else {
+           r = m-1
+        }
+    }
+    if arr[ans] >= key {
+        if ans == 0 { return -1 }
+	ans--
+    }
+    return arr[ans]
+```
+
 4. Find the Duplicate Number (array of n+1 elements - each value 1..n - only number is repeated)
 
 ```
