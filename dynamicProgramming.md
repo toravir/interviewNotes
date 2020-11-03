@@ -478,3 +478,28 @@ min dp[i] = 1
 for i = 1 to n-1:
     dp[i] = max (dp[j]+1 for each arr[j] < arr[i], j=0..i )
 ```
+
+Subset Sum 
+```
+DP[i][j] = True if Subset of A[0...i] sums to j, else False
+
+if (A[i] > j)
+DP[i][j] = DP[i-1][j]
+else 
+DP[i][j] = DP[i-1][j] OR DP[i-1][sum-A[i]]
+```
+
+Edit Distance
+```
+dp[i][j] => min edit distance of A[0...i] & B[0...j]
+
+dp[i][0] = i
+dp[0][j] = j
+if A[i] == B[j] {
+   dp[i][j] = dp[i-1][j-1]
+} else {
+   dp[i][j] = 1+min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j]) 
+}
+```
+
+
