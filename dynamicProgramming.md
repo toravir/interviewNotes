@@ -463,4 +463,18 @@ also dp[i][j+A[i-1]] has to be valid (non MAX)
     
 ```
 
+Longest Common Subsequence
+```
+if i == 0 || j == 0 { dp [i][j] = 0 }
+if A[i] == B[j]:
+   dp[i][j] = dp[i-1][j-1]+1
+else
+   dp[i][j] = max (dp[i-1][j], dp[i][j-1])
+```
 
+Longest Increasing Subsequence
+```
+min dp[i] = 1
+for i = 1 to n-1:
+    dp[i] = max (dp[j]+1 for each arr[j] < arr[i], j=0..i )
+```
