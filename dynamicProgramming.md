@@ -502,4 +502,12 @@ if A[i] == B[j] {
 }
 ```
 
+0/1 Knapsack
 
+```
+  dp[i][j] -> max value reachable if we have to chose from A[0..i] with max weight of j
+  dp[i][0] = dp[0][j] = 0
+  i = 0..n+1
+  w = 0..W+1
+  if wt[i-1] < w { dp[i][w] = max (dp[i-1][w], dp[i-1][w-w[i-1]]+val[i-1])   
+```
